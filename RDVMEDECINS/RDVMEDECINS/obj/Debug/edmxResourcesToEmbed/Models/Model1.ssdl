@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBRDVMEDECINSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENTS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TITRE" Type="varchar" MaxLength="50" />
+    <Property Name="NOM" Type="varchar" MaxLength="50" />
+    <Property Name="PRENOM" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CRENEAUX">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HDEBUT" Type="int" />
+    <Property Name="MDEBUT" Type="int" />
+    <Property Name="HFIN" Type="int" />
+    <Property Name="MFIN" Type="int" />
+    <Property Name="ID_MEDECIN" Type="bigint" />
+  </EntityType>
+  <EntityType Name="MEDECINS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TITRE" Type="varchar" MaxLength="50" />
+    <Property Name="NOM" Type="varchar" MaxLength="50" />
+    <Property Name="PRENOM" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JOUR" Type="date" />
+    <Property Name="ID_CLIENT" Type="bigint" />
+    <Property Name="ID_CRENEAU" Type="bigint" />
+  </EntityType>
+  <Association Name="FK__CRENEAUX__ID_MED__276EDEB3">
+    <End Role="MEDECINS" Type="Self.MEDECINS" Multiplicity="0..1" />
+    <End Role="CRENEAUX" Type="Self.CRENEAUX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDECINS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CRENEAUX">
+        <PropertyRef Name="ID_MEDECIN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RV__ID_CLIENT__2A4B4B5E">
+    <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
+    <End Role="RV" Type="Self.RV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RV">
+        <PropertyRef Name="ID_CLIENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RV__ID_CRENEAU__2B3F6F97">
+    <End Role="CRENEAUX" Type="Self.CRENEAUX" Multiplicity="0..1" />
+    <End Role="RV" Type="Self.RV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CRENEAUX">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RV">
+        <PropertyRef Name="ID_CRENEAU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBRDVMEDECINSModelStoreContainer">
+    <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CRENEAUX" EntityType="Self.CRENEAUX" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEDECINS" EntityType="Self.MEDECINS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RV" EntityType="Self.RV" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CRENEAUX__ID_MED__276EDEB3" Association="Self.FK__CRENEAUX__ID_MED__276EDEB3">
+      <End Role="MEDECINS" EntitySet="MEDECINS" />
+      <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RV__ID_CLIENT__2A4B4B5E" Association="Self.FK__RV__ID_CLIENT__2A4B4B5E">
+      <End Role="CLIENTS" EntitySet="CLIENTS" />
+      <End Role="RV" EntitySet="RV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RV__ID_CRENEAU__2B3F6F97" Association="Self.FK__RV__ID_CRENEAU__2B3F6F97">
+      <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+      <End Role="RV" EntitySet="RV" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

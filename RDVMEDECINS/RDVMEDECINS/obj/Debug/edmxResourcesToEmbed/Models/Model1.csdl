@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBRDVMEDECINSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBRDVMEDECINSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CLIENTS" EntityType="DBRDVMEDECINSModel.CLIENTS" />
+    <EntitySet Name="CRENEAUX" EntityType="DBRDVMEDECINSModel.CRENEAUX" />
+    <EntitySet Name="MEDECINS" EntityType="DBRDVMEDECINSModel.MEDECINS" />
+    <EntitySet Name="RV" EntityType="DBRDVMEDECINSModel.RV" />
+    <AssociationSet Name="FK__RV__ID_CLIENT__2A4B4B5E" Association="DBRDVMEDECINSModel.FK__RV__ID_CLIENT__2A4B4B5E">
+      <End Role="CLIENTS" EntitySet="CLIENTS" />
+      <End Role="RV" EntitySet="RV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CRENEAUX__ID_MED__276EDEB3" Association="DBRDVMEDECINSModel.FK__CRENEAUX__ID_MED__276EDEB3">
+      <End Role="MEDECINS" EntitySet="MEDECINS" />
+      <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RV__ID_CRENEAU__2B3F6F97" Association="DBRDVMEDECINSModel.FK__RV__ID_CRENEAU__2B3F6F97">
+      <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+      <End Role="RV" EntitySet="RV" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CLIENTS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TITRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PRENOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RV" Relationship="DBRDVMEDECINSModel.FK__RV__ID_CLIENT__2A4B4B5E" FromRole="CLIENTS" ToRole="RV" />
+  </EntityType>
+  <EntityType Name="CRENEAUX">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HDEBUT" Type="Int32" />
+    <Property Name="MDEBUT" Type="Int32" />
+    <Property Name="HFIN" Type="Int32" />
+    <Property Name="MFIN" Type="Int32" />
+    <Property Name="ID_MEDECIN" Type="Int64" />
+    <NavigationProperty Name="MEDECINS" Relationship="DBRDVMEDECINSModel.FK__CRENEAUX__ID_MED__276EDEB3" FromRole="CRENEAUX" ToRole="MEDECINS" />
+    <NavigationProperty Name="RV" Relationship="DBRDVMEDECINSModel.FK__RV__ID_CRENEAU__2B3F6F97" FromRole="CRENEAUX" ToRole="RV" />
+  </EntityType>
+  <EntityType Name="MEDECINS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TITRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PRENOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CRENEAUX" Relationship="DBRDVMEDECINSModel.FK__CRENEAUX__ID_MED__276EDEB3" FromRole="MEDECINS" ToRole="CRENEAUX" />
+  </EntityType>
+  <EntityType Name="RV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JOUR" Type="DateTime" Precision="0" />
+    <Property Name="ID_CLIENT" Type="Int64" />
+    <Property Name="ID_CRENEAU" Type="Int64" />
+    <NavigationProperty Name="CLIENTS" Relationship="DBRDVMEDECINSModel.FK__RV__ID_CLIENT__2A4B4B5E" FromRole="RV" ToRole="CLIENTS" />
+    <NavigationProperty Name="CRENEAUX" Relationship="DBRDVMEDECINSModel.FK__RV__ID_CRENEAU__2B3F6F97" FromRole="RV" ToRole="CRENEAUX" />
+  </EntityType>
+  <Association Name="FK__RV__ID_CLIENT__2A4B4B5E">
+    <End Type="DBRDVMEDECINSModel.CLIENTS" Role="CLIENTS" Multiplicity="0..1" />
+    <End Type="DBRDVMEDECINSModel.RV" Role="RV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RV">
+        <PropertyRef Name="ID_CLIENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CRENEAUX__ID_MED__276EDEB3">
+    <End Type="DBRDVMEDECINSModel.MEDECINS" Role="MEDECINS" Multiplicity="0..1" />
+    <End Type="DBRDVMEDECINSModel.CRENEAUX" Role="CRENEAUX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDECINS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CRENEAUX">
+        <PropertyRef Name="ID_MEDECIN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RV__ID_CRENEAU__2B3F6F97">
+    <End Type="DBRDVMEDECINSModel.CRENEAUX" Role="CRENEAUX" Multiplicity="0..1" />
+    <End Type="DBRDVMEDECINSModel.RV" Role="RV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CRENEAUX">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RV">
+        <PropertyRef Name="ID_CRENEAU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

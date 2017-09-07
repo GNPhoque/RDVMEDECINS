@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBRDVMEDECINSModelStoreContainer" CdmEntityContainer="DBRDVMEDECINSEntities">
+    <EntitySetMapping Name="CLIENTS">
+      <EntityTypeMapping TypeName="DBRDVMEDECINSModel.CLIENTS">
+        <MappingFragment StoreEntitySet="CLIENTS">
+          <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+          <ScalarProperty Name="NOM" ColumnName="NOM" />
+          <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CRENEAUX">
+      <EntityTypeMapping TypeName="DBRDVMEDECINSModel.CRENEAUX">
+        <MappingFragment StoreEntitySet="CRENEAUX">
+          <ScalarProperty Name="ID_MEDECIN" ColumnName="ID_MEDECIN" />
+          <ScalarProperty Name="MFIN" ColumnName="MFIN" />
+          <ScalarProperty Name="HFIN" ColumnName="HFIN" />
+          <ScalarProperty Name="MDEBUT" ColumnName="MDEBUT" />
+          <ScalarProperty Name="HDEBUT" ColumnName="HDEBUT" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEDECINS">
+      <EntityTypeMapping TypeName="DBRDVMEDECINSModel.MEDECINS">
+        <MappingFragment StoreEntitySet="MEDECINS">
+          <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+          <ScalarProperty Name="NOM" ColumnName="NOM" />
+          <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RV">
+      <EntityTypeMapping TypeName="DBRDVMEDECINSModel.RV">
+        <MappingFragment StoreEntitySet="RV">
+          <ScalarProperty Name="ID_CRENEAU" ColumnName="ID_CRENEAU" />
+          <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+          <ScalarProperty Name="JOUR" ColumnName="JOUR" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
